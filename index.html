@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Add Minecraft Server</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: #fff;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 420px;
+            padding: 24px;
+            border-radius: 16px;
+            background: #1d1d1d;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+
+        .server {
+            margin: 20px 0;
+            padding: 16px;
+            border-radius: 12px;
+            background: #292929;
+            text-align: left;
+        }
+
+        .server div {
+            margin: 8px 0;
+        }
+
+        .label {
+            color: #999;
+            font-size: 13px;
+        }
+
+        .value {
+            word-break: break-all;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: 0;
+            border-radius: 10px;
+            background: #43a047;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .error {
+            color: #ff6b6b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="card">
+        <h1>🎮 Minecraft Server</h1>
+
+        <div id="content">
+            <div class="server">
+                <div>
+                    <div class="label">Nama Server</div>
+                    <div class="value" id="serverName"></div>
+                </div>
+
+                <div>
+                    <div class="label">IP</div>
+                    <div class="value" id="serverIp"></div>
+                </div>
+
+                <div>
+                    <div class="label">Port</div>
+                    <div class="value" id="serverPort"></div>
+                </div>
+            </div>
+
+            <button id="connectButton">
+                Buka di Minecraft
+            </button>
+        </div>
+
+        <div id="error" class="error"></div>
+    </main>
+
+    <script>
+        const params = new URLSearchParams(location.search);
+
+        const name = params.get("name");
+        const ip = params.get("ip");
+        const port = params.get("port");
+
+        const content = document.getElementById("content");
+        const error = document.getElementById("error");
+
+        if (!name || !ip || !port) {
+            content.style.display = "none";
+            error.textContent =
+                "Parameter server tidak lengkap.";
+        } else {
+            document.getElementById("serverName").textContent = name;
+            document.getElementById("serverIp").textContent = ip;
+            document.getElementById("serverPort").textContent = port;
+
+            document
+                .getElementById("connectButton")
+                .addEventListener("click", () => {
+                    const deepLink =
+                        "minecraft://?addExternalServer=" +
+                        encodeURIComponent(name) +
+                        "|" +
+                        ip +
+                        ":" +
+                        port;
+
+                    window.location.href = deepLink;
+                });
+        }
+    </script>
+
+</body>
+</html>
