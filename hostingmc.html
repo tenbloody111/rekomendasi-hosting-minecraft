@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hosting Minecraft Terbaik!</title>
+  <style>
+    /* -------------------------------------------------------------------------- */
+    /* 1. DESIGN TOKENS                                                           */
+    /* -------------------------------------------------------------------------- */
+    :root {
+      /* Colors */
+      --color-bg: #f3f5f3;
+      --color-surface: #ffffff;
+      --color-border: #e3e7e3;
+      --color-text: #1e2b23;
+      --color-text-muted: #6b776f;
+      --color-accent: #1f6f4a;
+      --color-accent-dark: #164f36;
+      --color-price: #b5651d;
+
+      /* Border Radius */
+      --radius-sm: 6px;
+      --radius-md: 10px;
+
+      /* Spacing Scale */
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 12px;
+      --space-lg: 16px;
+      --space-xl: 24px;
+      --space-2xl: 32px;
+    }
+
+    /* -------------------------------------------------------------------------- */
+    /* 2. BASE & RESET                                                            */
+    /* -------------------------------------------------------------------------- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: var(--space-2xl) var(--space-md);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.5;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    a {
+      color: var(--color-accent);
+      text-decoration: underline;
+      text-decoration-color: rgba(31, 111, 74, 0.35);
+      text-underline-offset: 3px;
+      font-weight: 600;
+      transition: color 0.15s ease-in-out, text-decoration-color 0.15s ease-in-out;
+    }
+
+    a:hover,
+    a:focus-visible {
+      color: var(--color-accent-dark);
+      text-decoration-color: currentColor;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* -------------------------------------------------------------------------- */
+    /* 3. LAYOUT & CARDS (MOBILE FIRST)                                           */
+    /* -------------------------------------------------------------------------- */
+    .card {
+      width: 100%;
+      max-width: 420px;
+      background-color: var(--color-surface);
+      border-radius: var(--radius-md);
+      padding: var(--space-xl);
+      box-shadow: 0 4px 20px rgba(30, 43, 35, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+    }
+
+    .card__header {
+      text-align: center;
+    }
+
+    .card__title {
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin: 0 0 var(--space-xs);
+    }
+
+    .card__subtitle {
+      font-size: 13px;
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    .panel {
+      background-color: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+    }
+
+    .panel__title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+      margin: 0 0 var(--space-md);
+    }
+
+    .panel__note {
+      margin: var(--space-lg) 0 0;
+      font-size: 11px;
+      color: var(--color-text-muted);
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* -------------------------------------------------------------------------- */
+    /* 4. HOSTER RANKING & OTHER LISTS                                            */
+    /* -------------------------------------------------------------------------- */
+    .ranking-list {
+      list-style: none;
+      counter-reset: rank;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .ranking-list__item {
+      counter-increment: rank;
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .ranking-list__item::before {
+      content: counter(rank);
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background-color: var(--color-accent);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ranking-list__link {
+      flex: 1;
+      min-width: 0;
+      font-size: 14px;
+    }
+
+    .price-tag {
+      color: var(--color-price);
+      font-weight: 600;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .other-hosts {
+      margin-top: var(--space-lg);
+      padding-top: var(--space-lg);
+      border-top: 1px dashed var(--color-border);
+    }
+
+    .other-hosts__label {
+      color: var(--color-text-muted);
+      font-weight: 600;
+      font-size: 13px;
+      display: block;
+      margin-bottom: var(--space-xs);
+    }
+
+    .other-hosts__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs) var(--space-md);
+    }
+
+    .other-hosts__link {
+      font-size: 14px;
+    }
+
+    /* -------------------------------------------------------------------------- */
+    /* 5. RESPONSIVE MEDIA QUERIES                                               */
+    /* -------------------------------------------------------------------------- */
+    @media (max-width: 360px) {
+      .card {
+        padding: var(--space-lg);
+      }
+    }
+
+    /* Desktop / PC Layout (768px ke atas) */
+    @media (min-width: 768px) {
+      body {
+        padding: var(--space-2xl);
+        align-items: center;
+      }
+
+      .card {
+        max-width: 460px;
+        padding: var(--space-2xl);
+        gap: var(--space-2xl);
+      }
+
+      .card__title {
+        font-size: 24px;
+      }
+
+      .card__subtitle {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="card">
+    <!-- Header -->
+    <header class="card__header">
+      <h1 class="card__title">Hosting Minecraft Terbaik!</h1>
+      <p class="card__subtitle">100% lokal, Terbagus, Termurah, dan Terpercaya!✨</p>
+    </header>
+
+    <!-- Hosting Ranking Section -->
+    <section class="panel" aria-label="Peringkat hosting Minecraft">
+      <h2 class="panel__title">Peringkat</h2>
+
+      <ol class="ranking-list">
+        <li class="ranking-list__item"><a href="https://nexuscloud.id" class="ranking-list__link" target="_blank" rel="noopener noreferrer">Nexuscloud</a><span class="price-tag">18k</span></li>
+        <li class="ranking-list__item"><a href="https://raehost.com/id/pricing" class="ranking-list__link" target="_blank" rel="noopener noreferrer">Raehost</a><span class="price-tag">17k</span></li>
+        <li class="ranking-list__item"><a href="https://raznar.id/game-hosting/minecraft/general/" class="ranking-list__link" target="_blank" rel="noopener noreferrer">Raznar</a><span class="price-tag">16k</span></li>
+        <li class="ranking-list__item"><a href="https://clients.arqonara.com/products/shared-hosting" class="ranking-list__link" target="_blank" rel="noopener noreferrer">Arqonara</a><span class="price-tag">12k</span></li>
+        <li class="ranking-list__item"><a href="https://zelpstore.id" class="ranking-list__link" target="_blank" rel="noopener noreferrer">Zelpstore</a><span class="price-tag">5k</span></li>
+        <li class="ranking-list__item"><a href="https://billing.mineidhost.com/products/asia-minecraft-basic-hosting" class="ranking-list__link" target="_blank" rel="noopener noreferrer">MineIdhost</a><span class="price-tag">10k</span></li>
+      </ol>
+
+      <div class="other-hosts">
+        <span class="other-hosts__label">Lainnya:</span>
+        <ul class="other-hosts__list">
+          <li><a href="https://frcore.web.id/" class="other-hosts__link" target="_blank" rel="noopener noreferrer">FRcore</a></li>
+          <li><a href="https://store.zknesia.my.id/" class="other-hosts__link" target="_blank" rel="noopener noreferrer">Zknesia</a></li>
+          <li><a href="https://bytenodes.icu/" class="other-hosts__link" target="_blank" rel="noopener noreferrer">ByteNodes</a></li>
+        </ul>
+      </div>
+
+      <p class="panel__note">*note: harga diatas dalam bentuk per "1 gb"*</p>
+    </section>
+  </main>
+
+</body>
+</html>
